@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package pages
+package models
 
-import models.FileMetadata
+import utils.EnumJson
 
-case object UploadSupportingMaterialMultiplePage extends QuestionPage[Seq[FileMetadata]] {
+object ScanStatus extends Enumeration {
+  type ScanStatus = Value
+  val READY, FAILED = Value
 
-  override def toString: String = "uploadSupportingMaterialMultiple"
+  implicit val format = EnumJson.format(ScanStatus)
 }

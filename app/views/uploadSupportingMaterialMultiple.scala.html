@@ -15,19 +15,19 @@
  *@
 
 @import config.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import controllers.routes._
 @import models.Mode
+@import uk.gov.hmrc.play.views.html._
 @import views.ViewUtils._
 
-@(appConfig: FrontendAppConfig, form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(appConfig: FrontendAppConfig, form: Form[_], files: Seq[FileMetadata], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
     title = s"${errorPrefix(form)} ${messages("uploadSupportingMaterialMultiple.title")}",
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @helpers.form(action = UploadSupportingMaterialMultipleController.onSubmit(mode), 'autoComplete -> "off") {
+    @helpers.form(action = UploadSupportingMaterialMultipleController.onSubmit(mode), 'autoComplete -> "off", 'enctype -> "multipart/form-data") {
 
         @components.back_link()
 
@@ -35,11 +35,18 @@
 
         @components.heading("uploadSupportingMaterialMultiple.heading")
 
-        @components.input_text(
-          field = form("value"),
+        @components.input_file(
+          field = form("file"),
           label = messages("uploadSupportingMaterialMultiple.heading"),
           labelClass=Some("visually-hidden")
         )
+
+        @if(files.nonEmpty) {
+            <h1 class="heading-medium">Files Attached</h1>
+            @for(file: FileMetadata <- files) {
+                <p>@{file.fileName}</p>
+            }
+        }
 
         @components.submit_button()
     }

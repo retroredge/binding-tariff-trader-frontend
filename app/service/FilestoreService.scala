@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-package pages
+package service
 
-import models.FileMetadata
+import connectors.BindingTariffFilestoreConnector
+import javax.inject.{Inject, Singleton}
+import models.{FileMetadata, FileWithMetadata}
+import uk.gov.hmrc.http.HeaderCarrier
 
-case object UploadSupportingMaterialMultiplePage extends QuestionPage[Seq[FileMetadata]] {
+import scala.concurrent.Future
 
-  override def toString: String = "uploadSupportingMaterialMultiple"
+@Singleton
+class FilestoreService @Inject()(connector: BindingTariffFilestoreConnector){
+
+  def upload(file: FileWithMetadata)(implicit hc: HeaderCarrier): Future[FileMetadata] = {
+    connector.upload(file)
+  }
+
 }

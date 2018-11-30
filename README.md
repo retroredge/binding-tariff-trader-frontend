@@ -20,6 +20,8 @@ The Front-end microrservice for the BTI Application journey on GOV.UK
 5) Start Auth Login Stub `sm --start AUTH_LOGIN_STUB -f`
 6) Start Auth Login API `sm --start AUTH_LOGIN_API -f`
 7) Start User Details `sm --start USER_DETAILS -f`
+8) Start The Filestore `sm --start BINDING_TARIFF_FILESTORE -r`
+9) Start Upscan Stub `sm --start UPSCAN_STUB -r`
 
 
 ##### Running With SBT

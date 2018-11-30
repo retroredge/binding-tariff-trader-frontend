@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-package pages
+package models
 
-import models.FileMetadata
+import java.util.UUID
 
-case object UploadSupportingMaterialMultiplePage extends QuestionPage[Seq[FileMetadata]] {
+import models.ScanStatus.ScanStatus
+import play.api.libs.json.{Json, OFormat}
 
-  override def toString: String = "uploadSupportingMaterialMultiple"
+case class FileMetadata
+(
+  id: String = UUID.randomUUID().toString,
+  fileName: String,
+  mimeType: String,
+  url: Option[String] = None,
+  scanStatus: Option[ScanStatus] = None
+)
+
+object FileMetadata {
+  implicit val format: OFormat[FileMetadata] = Json.format[FileMetadata]
 }

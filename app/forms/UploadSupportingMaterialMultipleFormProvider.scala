@@ -16,9 +16,8 @@
 
 package forms
 
-import javax.inject.Inject
-
 import forms.mappings.Mappings
+import javax.inject.Inject
 import play.api.data.Form
 
 class UploadSupportingMaterialMultipleFormProvider @Inject() extends Mappings {
@@ -26,7 +25,6 @@ class UploadSupportingMaterialMultipleFormProvider @Inject() extends Mappings {
   def apply(): Form[String] =
     Form(
       "value" -> text("uploadSupportingMaterialMultiple.error.required")
-        .verifying(maxLength(100, "uploadSupportingMaterialMultiple.error.length"))
     )
 
 }

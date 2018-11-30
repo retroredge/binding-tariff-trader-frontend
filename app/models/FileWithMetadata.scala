@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package pages
+package models
 
-import models.FileMetadata
+import play.api.libs.Files.TemporaryFile
 
-case object UploadSupportingMaterialMultiplePage extends QuestionPage[Seq[FileMetadata]] {
-
-  override def toString: String = "uploadSupportingMaterialMultiple"
-}
+case class FileWithMetadata
+(
+  file: TemporaryFile,
+  metadata: FileMetadata
+)
